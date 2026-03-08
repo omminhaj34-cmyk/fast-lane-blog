@@ -18,8 +18,6 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Ad between sections */}
-        <div className="ad-slot h-[90px] mb-12">Advertisement Space — Leaderboard (728×90)</div>
 
         {/* Latest Articles + Sidebar */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

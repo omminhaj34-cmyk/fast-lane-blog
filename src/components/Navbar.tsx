@@ -10,14 +10,11 @@ const Navbar = () => {
 
   return (
     <header className="border-b border-border bg-card sticky top-0 z-50">
-      {/* Ad slot - header */}
-      <div className="container py-2">
-        <div className="ad-slot h-[90px]">Advertisement Space — Header Banner (728×90)</div>
-      </div>
+
 
       <nav className="container flex items-center justify-between py-4">
         <Link to="/" className="font-display text-2xl font-bold tracking-tight text-foreground">
-          The<span className="text-accent">Daily</span>Blog
+          Trending <span className="text-accent">News</span>
         </Link>
 
         {/* Desktop nav */}
@@ -29,6 +26,7 @@ const Navbar = () => {
           ))}
           <Link to="/about" className="text-sm font-medium text-foreground hover:text-accent transition-colors">About</Link>
           <Link to="/contact" className="text-sm font-medium text-foreground hover:text-accent transition-colors">Contact</Link>
+          <Link to="/privacy-policy" className="text-sm font-medium text-foreground hover:text-accent transition-colors">Privacy Policy</Link>
         </div>
 
         <div className="flex items-center gap-3">
@@ -68,6 +66,7 @@ const Navbar = () => {
             ))}
             <Link to="/about" onClick={() => setMobileOpen(false)} className="text-sm font-medium py-2 text-foreground">About</Link>
             <Link to="/contact" onClick={() => setMobileOpen(false)} className="text-sm font-medium py-2 text-foreground">Contact</Link>
+            <Link to="/privacy-policy" onClick={() => setMobileOpen(false)} className="text-sm font-medium py-2 text-foreground">Privacy Policy</Link>
           </div>
         </div>
       )}

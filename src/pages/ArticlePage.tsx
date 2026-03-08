@@ -59,8 +59,6 @@ const ArticlePage = () => {
           <img src={article.image} alt={article.title} className="w-full aspect-[2/1] object-cover" itemProp="image" />
         </div>
 
-        {/* Ad after image */}
-        <div className="ad-slot h-[90px] mb-8 max-w-4xl">Advertisement Space (728×90)</div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
@@ -83,8 +81,6 @@ const ArticlePage = () => {
             {/* Article Content */}
             <div className="article-content" itemProp="articleBody" dangerouslySetInnerHTML={{ __html: article.content }} />
 
-            {/* Ad after content */}
-            <div className="ad-slot h-[250px] my-8">Advertisement Space (336×280)</div>
 
             {/* Share Buttons */}
             <div className="border-t border-border pt-6 mt-8">

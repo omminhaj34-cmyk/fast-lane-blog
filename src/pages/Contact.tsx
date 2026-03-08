@@ -1,69 +1,141 @@
-import { useState } from "react";
 import Layout from "@/components/Layout";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 const Contact = () => {
-  const [submitted, setSubmitted] = useState(false);
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    toast({
+      title: "Message sent!",
+      description: "We'll get back to you as soon as possible.",
+    });
+    setFormData({ name: "", email: "", subject: "", message: "" });
   };
 
   return (
     <Layout>
-      <section className="container py-12 max-w-4xl">
-        <h1 className="font-display text-4xl font-bold text-foreground mb-4">Contact Us</h1>
-        <p className="text-muted-foreground mb-10">Have a question, suggestion, or business inquiry? We'd love to hear from you.</p>
+      <section className="container py-12 md:py-20 animate-fade-in">
+        <div className="max-w-4xl mx-auto">
+          <nav className="text-sm text-muted-foreground mb-8">
+            <Link to="/" className="hover:text-accent transition-colors">Home</Link>
+            <span className="mx-2">/</span>
+            <span className="text-foreground font-medium">Contact</span>
+          </nav>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="md:col-span-2">
-            {submitted ? (
-              <div className="bg-accent/10 border border-accent/20 rounded-lg p-8 text-center">
-                <h2 className="font-display text-2xl font-bold text-foreground mb-2">Thank You!</h2>
-                <p className="text-muted-foreground">Your message has been received. We'll get back to you soon.</p>
+          <h1 className="font-display text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
+          <p className="text-xl text-muted-foreground mb-12 max-w-2xl">
+            Do you have a question, inquiry, or suggestion regarding <Link to="/about" className="text-accent hover:underline">Trending News</Link>? Or perhaps you've built a new AI tool you'd like us to review? We would love to hear from you.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="space-y-8">
+              <div className="flex items-start gap-4">
+                <div className="bg-secondary p-3 rounded-full text-foreground">
+                  <Mail className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg mb-1">Email</h3>
+                  <p className="text-muted-foreground">hello@trendingnews.com</p>
+                  <p className="text-sm text-muted-foreground mt-1">We typically respond within 1-2 business days.</p>
+                </div>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">Name</label>
-                    <input id="name" type="text" required maxLength={100} className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-accent" />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1.5">Email</label>
-                    <input id="email" type="email" required maxLength={255} className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-accent" />
-                  </div>
+
+              <div className="flex items-start gap-4">
+                <div className="bg-secondary p-3 rounded-full text-foreground">
+                  <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-1.5">Subject</label>
-                  <input id="subject" type="text" required maxLength={200} className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-accent" />
+                  <h3 className="font-bold text-lg mb-1">Location</h3>
+                  <p className="text-muted-foreground">New York, NY<br />United States</p>
                 </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">Message</label>
-                  <textarea id="message" rows={5} required maxLength={1000} className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground resize-none focus:outline-none focus:ring-2 focus:ring-accent" />
+              </div>
+
+
+            </div>
+
+            <div className="md:col-span-2">
+              <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-2xl border border-border">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm font-medium">Your Name</label>
+                    <input
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      placeholder="John Doe"
+                      className="w-full px-4 py-3 rounded-lg border border-input bg-background/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="text-sm font-medium">Email Address</label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="johndoe@example.com"
+                      className="w-full px-4 py-3 rounded-lg border border-input bg-background/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+                    />
+                  </div>
                 </div>
-                <button type="submit" className="px-8 py-3 rounded-lg bg-accent text-accent-foreground font-semibold hover:opacity-90 transition-opacity">Send Message</button>
+
+                <div className="space-y-2">
+                  <label htmlFor="subject" className="text-sm font-medium">Subject</label>
+                  <input
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    placeholder="How can we help?"
+                    className="w-full px-4 py-3 rounded-lg border border-input bg-background/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm font-medium">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    placeholder="Write your message here..."
+                    rows={6}
+                    className="w-full px-4 py-3 rounded-lg border border-input bg-background/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3 px-6 rounded-lg bg-accent text-accent-foreground font-medium hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background"
+                >
+                  Send Message
+                </button>
+                <p className="text-xs text-center text-muted-foreground mt-4">
+                  For information on how we handle your data, please see our <Link to="/privacy-policy" className="hover:text-accent underline">Privacy Policy</Link>.
+                </p>
               </form>
-            )}
-          </div>
-
-          <div className="space-y-6">
-            {[
-              { icon: Mail, title: "Email", text: "contact@thedailyblog.com" },
-              { icon: MapPin, title: "Address", text: "123 Blog Street, Digital City" },
-              { icon: Phone, title: "Phone", text: "+1 (555) 123-4567" },
-            ].map(({ icon: Icon, title, text }) => (
-              <div key={title} className="flex gap-3">
-                <div className="p-2.5 rounded-lg bg-accent/10">
-                  <Icon className="w-5 h-5 text-accent" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-foreground">{title}</h3>
-                  <p className="text-sm text-muted-foreground">{text}</p>
-                </div>
-              </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>

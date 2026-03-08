@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <h3 className="font-display text-2xl font-bold mb-3">
-              The<span className="text-accent">Daily</span>Blog
+              Trending <span className="text-accent">News</span>
             </h3>
             <p className="text-primary-foreground/70 max-w-sm text-sm leading-relaxed">
               Delivering thoughtful articles on technology, business, health, travel, and lifestyle. Stay informed, stay inspired.
@@ -47,7 +47,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-primary-foreground/10 mt-10 pt-6 text-center text-xs text-primary-foreground/50">
-          © {new Date().getFullYear()} TheDailyBlog. All rights reserved.
+          © {new Date().getFullYear()} Trending News. All rights reserved.
         </div>
       </div>
     </footer>

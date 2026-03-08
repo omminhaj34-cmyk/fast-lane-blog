@@ -6,8 +6,6 @@ const Sidebar = () => {
 
   return (
     <aside className="space-y-8">
-      {/* Ad slot */}
-      <div className="ad-slot h-[250px]">Ad Space (300×250)</div>
 
       {/* Recent Posts */}
       <div className="bg-card rounded-lg border border-border p-5">
@@ -47,8 +45,6 @@ const Sidebar = () => {
         </form>
       </div>
 
-      {/* Another Ad */}
-      <div className="ad-slot h-[250px] sticky top-32">Ad Space (300×250)</div>
     </aside>
   );
 };

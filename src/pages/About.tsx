@@ -1,44 +1,54 @@
 import Layout from "@/components/Layout";
-import { Users, Award, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const About = () => {
   return (
     <Layout>
-      <section className="container py-12 max-w-3xl">
-        <h1 className="font-display text-4xl font-bold text-foreground mb-6">About TheDailyBlog</h1>
-        <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-          TheDailyBlog is a trusted source for insightful articles on technology, business, health, travel, education, and lifestyle. Our mission is to inform, inspire, and empower our readers with well-researched, engaging content.
-        </p>
+      <section className="container py-12 md:py-20 animate-fade-in">
+        <div className="max-w-3xl mx-auto prose prose-neutral dark:prose-invert lg:prose-lg">
+          <nav className="text-sm text-muted-foreground mb-8 not-prose">
+            <Link to="/" className="hover:text-accent transition-colors">Home</Link>
+            <span className="mx-2">/</span>
+            <span className="text-foreground font-medium">About</span>
+          </nav>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {[
-            { icon: Users, title: "50K+ Readers", desc: "A growing community of engaged readers." },
-            { icon: BookOpen, title: "500+ Articles", desc: "High-quality, original content published." },
-            { icon: Award, title: "Est. 2023", desc: "Trusted by readers worldwide since 2023." },
-          ].map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="bg-card border border-border rounded-lg p-6 text-center">
-              <Icon className="w-8 h-8 text-accent mx-auto mb-3" />
-              <h3 className="font-display font-bold text-foreground mb-1">{title}</h3>
-              <p className="text-sm text-muted-foreground">{desc}</p>
-            </div>
-          ))}
+          <h1 className="font-display text-4xl md:text-5xl font-bold mb-8">About Trending News</h1>
+
+
+          <p className="lead text-xl text-muted-foreground mb-8">
+            Welcome to <strong>Trending News</strong>, your premier destination for the latest tutorials, guides, and reviews in the ever-evolving world of technology. Our goal is to make complex tech topics accessible to everyone, from students embarking on their coding journey to seasoned developers looking to stay ahead of the curve.
+          </p>
+
+          <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-4">Our Mission</h2>
+          <p>
+            Our mission is simple: to empower individuals with the knowledge they need to harness the power of modern technology. We believe that continuous learning is the key to success in the fast-paced tech industry. Through high-quality, actionable content, we aim to bridge the gap between theoretical concepts and practical applications.
+          </p>
+
+          <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-4">What We Cover</h2>
+          <ul className="space-y-4 my-6">
+            <li>
+              <strong>AI Tools:</strong> Discover the latest artificial intelligence software, read comprehensive reviews, and learn how to integrate these tools into your daily workflow to boost productivity.
+            </li>
+            <li>
+              <strong>Machine Learning:</strong> Demystifying algorithms, neural networks, and data science. We offer beginner-friendly guides and advanced tutorials.
+            </li>
+            <li>
+              <strong>Automation Tools:</strong> Streamline your personal and professional life by leveraging powerful automation platforms and scripts.
+            </li>
+            <li>
+              <strong>Programming Resources:</strong> From Python and JavaScript to specialized frameworks, we provide resources, best practices, and project guides.
+            </li>
+          </ul>
+
+          <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-4">About the Author</h2>
+          <p>
+            Hi, I'm the founder and chief editor of Trending News. With years of experience in software development and technical writing, I discovered a passion for breaking down complex tech topics. What started as personal notes quickly grew into a platform aimed at helping others overcome the typical roadblocks in tech education. When I'm not writing, I'm usually testing out the newest AI tools or experimenting with automation pipelines.
+          </p>
+
+          <p>
+            Thank you for stopping by, and I hope you find our content valuable!
+          </p>
         </div>
-
-        <h2 className="font-display text-2xl font-bold text-foreground mb-4">Our Mission</h2>
-        <p className="text-muted-foreground leading-relaxed mb-6">
-          We believe in the power of quality content to educate and inspire. Our team of experienced writers and subject matter experts work diligently to bring you articles that are not only informative but also enjoyable to read. We cover a wide range of topics to cater to diverse interests while maintaining the highest standards of accuracy and integrity.
-        </p>
-
-        <h2 className="font-display text-2xl font-bold text-foreground mb-4">Our Team</h2>
-        <p className="text-muted-foreground leading-relaxed mb-6">
-          Our editorial team consists of passionate writers, researchers, and editors who are experts in their respective fields. Each article goes through a rigorous editorial process to ensure accuracy, readability, and value for our readers.
-        </p>
-
-        <h2 className="font-display text-2xl font-bold text-foreground mb-4">Contact Us</h2>
-        <p className="text-muted-foreground leading-relaxed">
-          We love hearing from our readers. Whether you have feedback, a story idea, or a business inquiry, feel free to reach out through our{" "}
-          <a href="/contact" className="text-accent hover:underline">contact page</a>.
-        </p>
       </section>
     </Layout>
   );

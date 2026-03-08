@@ -60,7 +60,6 @@ const Blog = () => {
                 {filtered.map((article, i) => (
                   <div key={article.id}>
                     <ArticleCard article={article} />
-                    {i === 1 && <div className="ad-slot h-[90px] mt-6">Ad Space — In-Feed (728×90)</div>}
                   </div>
                 ))}
               </div>

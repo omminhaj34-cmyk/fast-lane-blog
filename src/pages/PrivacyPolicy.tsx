@@ -1,68 +1,75 @@
 import Layout from "@/components/Layout";
+import { Link } from "react-router-dom";
 
 const PrivacyPolicy = () => {
   return (
     <Layout>
-      <section className="container py-12 max-w-3xl">
-        <h1 className="font-display text-4xl font-bold text-foreground mb-2">Privacy Policy</h1>
-        <p className="text-sm text-muted-foreground mb-10">Last updated: March 1, 2026</p>
+      <section className="container py-12 md:py-20 animate-fade-in">
+        <div className="max-w-3xl mx-auto prose prose-neutral dark:prose-invert lg:prose-lg">
+          <nav className="text-sm text-muted-foreground mb-8 not-prose">
+            <Link to="/" className="hover:text-accent transition-colors">Home</Link>
+            <span className="mx-2">/</span>
+            <span className="text-foreground font-medium">Privacy Policy</span>
+          </nav>
 
-        <div className="prose prose-neutral max-w-none space-y-6 text-muted-foreground leading-relaxed">
-          <div>
-            <h2 className="font-display text-xl font-bold text-foreground mb-3">1. Introduction</h2>
-            <p>Welcome to TheDailyBlog ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
-          </div>
+          <h1 className="font-display text-4xl md:text-5xl font-bold mb-8">Privacy Policy</h1>
 
-          <div>
-            <h2 className="font-display text-xl font-bold text-foreground mb-3">2. Information We Collect</h2>
-            <p>We collect information that you provide directly to us, such as when you subscribe to our newsletter, fill out a contact form, or leave a comment. This may include your name, email address, and any message content you provide.</p>
-            <p>We also automatically collect certain information when you visit our website, including your IP address, browser type, operating system, referring URLs, and pages viewed. This data helps us improve our website and provide a better user experience.</p>
-          </div>
 
-          <div>
-            <h2 className="font-display text-xl font-bold text-foreground mb-3">3. Use of Cookies</h2>
-            <p>Our website uses cookies and similar tracking technologies to enhance your browsing experience, analyze site traffic, and serve personalized advertisements. Cookies are small data files placed on your device that allow us to remember your preferences and provide relevant content.</p>
-            <p>Third-party advertising partners, including Google AdSense, may use cookies to serve ads based on your prior visits to our website or other websites. You can opt out of personalized advertising by visiting Google's Ads Settings.</p>
-          </div>
+          <p className="lead text-xl text-muted-foreground mb-8">
+            At <strong>Trending News</strong>, accessible from our website, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Trending News and how we use it.
+          </p>
 
-          <div>
-            <h2 className="font-display text-xl font-bold text-foreground mb-3">4. Google AdSense</h2>
-            <p>We use Google AdSense to display advertisements on our website. Google AdSense uses cookies and web beacons to serve ads based on your visits to this and other websites. Google's use of the DART cookie enables it to serve ads based on your interests. You may opt out of the DART cookie by visiting the Google Ad and Content Network Privacy Policy.</p>
-          </div>
+          <p>
+            If you have additional questions or require more information about our Privacy Policy, do not hesitate to <Link to="/contact">contact us</Link>.
+          </p>
 
-          <div>
-            <h2 className="font-display text-xl font-bold text-foreground mb-3">5. Third-Party Services</h2>
-            <p>We may use third-party service providers to help us operate our website, conduct our business, or service you. These third parties have access to your personal information only to perform specific tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
-          </div>
+          <h2 className="text-2xl font-bold mt-10 mb-4">1. Data We Collect</h2>
+          <p>
+            We only ask for personal information when we truly need it to provide a service to you. For instance, when you submit a contact form or sign up for our newsletter. We collect it by fair and lawful means, with your knowledge and consent.
+          </p>
+          <p>
+            We may collect:
+          </p>
+          <ul className="list-disc pl-6 space-y-2 my-4">
+            <li>Name and Email address (if provided in our contact form or newsletter).</li>
+            <li>Usage Data (such as your IP address, browser type, and time spent on specific pages).</li>
+          </ul>
 
-          <div>
-            <h2 className="font-display text-xl font-bold text-foreground mb-3">6. Data Security</h2>
-            <p>We implement appropriate technical and organizational security measures to protect the security of your personal information. However, please note that no method of transmission over the Internet or electronic storage is 100% secure.</p>
-          </div>
+          <h2 className="text-2xl font-bold mt-10 mb-4">2. Google AdSense and Cookies</h2>
+          <p>
+            Google, as a third-party vendor, uses cookies to serve ads on our site. Google's use of the DART cookie enables it to serve ads to our users based on previous visits to our site and other sites on the internet.
+          </p>
+          <p>
+            Our advertising partners may use cookies and web beacons on our site. Our advertising partners include Google AdSense.
+          </p>
+          <p>
+            These third-party ad servers or ad networks use technology in their respective advertisements and links that appear on Trending News and which are sent directly to your browser. They automatically receive your IP address when this occurs. Other technologies (such as cookies, JavaScript, or Web Beacons) may also be used by our site's third-party ad networks to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on the site.
+          </p>
+          <p>
+            Trending News has no access to or control over these cookies that are used by third-party advertisers.
+          </p>
 
-          <div>
-            <h2 className="font-display text-xl font-bold text-foreground mb-3">7. Your Rights</h2>
-            <p>Depending on your location, you may have certain rights regarding your personal information, including the right to access, correct, delete, or port your data. To exercise any of these rights, please contact us using the information provided below.</p>
-          </div>
+          <h2 className="text-2xl font-bold mt-10 mb-4">3. Third-Party Privacy Policies</h2>
+          <p>
+            Trending News's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options. You can choose to disable cookies through your individual browser options.
+          </p>
 
-          <div>
-            <h2 className="font-display text-xl font-bold text-foreground mb-3">8. Children's Privacy</h2>
-            <p>Our website is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe we have collected information from a child under 13, please contact us immediately.</p>
-          </div>
+          <h2 className="text-2xl font-bold mt-10 mb-4">4. User Data Protection</h2>
+          <p>
+            We highly value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.
+          </p>
+          <p>
+            We do not share any personally identifying information publicly or with third-parties, except when required to by law.
+          </p>
 
-          <div>
-            <h2 className="font-display text-xl font-bold text-foreground mb-3">9. Changes to This Policy</h2>
-            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date. You are advised to review this Privacy Policy periodically for any changes.</p>
-          </div>
+          <h2 className="text-2xl font-bold mt-10 mb-4">5. Contact Information</h2>
+          <p>
+            If you have any questions about this Privacy Policy, please contact us via our <Link to="/contact">contact page</Link> or directly at <a href="mailto:hello@trendingnews.com" className="text-accent hover:underline">hello@trendingnews.com</a>.
+          </p>
 
-          <div>
-            <h2 className="font-display text-xl font-bold text-foreground mb-3">10. Contact Us</h2>
-            <p>If you have any questions about this Privacy Policy, please contact us at:</p>
-            <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li>Email: privacy@thedailyblog.com</li>
-              <li>Address: 123 Blog Street, Digital City</li>
-            </ul>
-          </div>
+          <p className="text-sm text-muted-foreground mt-12 pt-6 border-t border-border">
+            Last Updated: March 8, 2026
+          </p>
         </div>
       </section>
     </Layout>
