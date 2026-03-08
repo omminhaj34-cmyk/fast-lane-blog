@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import Layout from "@/components/Layout";
 import ArticleCard from "@/components/ArticleCard";
 import Sidebar from "@/components/Sidebar";
-import { articles, categories } from "@/data/articles";
+import { useArticles, categories } from "@/data/articles";
 import { Link } from "react-router-dom";
 
 const Blog = () => {
@@ -10,9 +10,11 @@ const Blog = () => {
   const categoryFilter = searchParams.get("category");
   const searchQuery = searchParams.get("search")?.toLowerCase();
 
+  const { data: articles = [] } = useArticles();
+
   let filtered = articles;
   if (categoryFilter) {
-    filtered = filtered.filter(a => a.category === categoryFilter);
+    filtered = filtered.filter(a => a.category.toLowerCase() === categoryFilter.toLowerCase());
   }
   if (searchQuery) {
     filtered = filtered.filter(a =>
@@ -47,7 +49,7 @@ const Blog = () => {
         <div className="flex flex-wrap gap-2 mb-8">
           <Link to="/blog" className={`px-4 py-2 text-sm rounded-full border transition-colors ${!categoryFilter ? "bg-accent text-accent-foreground border-accent" : "border-border text-muted-foreground hover:border-accent hover:text-accent"}`}>All</Link>
           {categories.map(cat => (
-            <Link key={cat} to={`/blog?category=${cat}`} className={`px-4 py-2 text-sm rounded-full border transition-colors ${categoryFilter === cat ? "bg-accent text-accent-foreground border-accent" : "border-border text-muted-foreground hover:border-accent hover:text-accent"}`}>{cat}</Link>
+            <Link key={cat} to={`/blog?category=${cat}`} className={`px-4 py-2 text-sm rounded-full border transition-colors ${categoryFilter?.toLowerCase() === cat.toLowerCase() ? "bg-accent text-accent-foreground border-accent" : "border-border text-muted-foreground hover:border-accent hover:text-accent"}`}>{cat}</Link>
           ))}
         </div>
 

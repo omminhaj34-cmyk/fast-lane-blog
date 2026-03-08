@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import { PlusCircle, Edit, Trash2, X, Save } from "lucide-react";
-import { articles as initialArticles, Article, categories } from "@/data/articles";
+import { useArticles, Article, categories } from "@/data/articles";
+import { useQueryClient } from "@tanstack/react-query";
 
 const ADMIN_PASSWORD = "wt-20260308";
 
@@ -11,24 +12,13 @@ const Admin = () => {
     const [passwordInput, setPasswordInput] = useState("");
     const [loginError, setLoginError] = useState("");
 
-    const [posts, setPosts] = useState<Article[]>(() => {
-        try {
-            const saved = localStorage.getItem("blog_posts");
-            if (saved) {
-                return JSON.parse(saved);
-            }
-        } catch (error) {
-            console.error("Error loading posts from localStorage", error);
-        }
-        return initialArticles;
-    });
+    const { data: posts = [] } = useArticles();
+    const queryClient = useQueryClient();
 
-    useEffect(() => {
-        localStorage.setItem("blog_posts", JSON.stringify(posts));
-    }, [posts]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingPost, setEditingPost] = useState<Article | null>(null);
     const [formData, setFormData] = useState<Partial<Article>>({});
+    const [isLoading, setIsLoading] = useState(false);
 
     const openModal = (post?: Article) => {
         if (post) {
@@ -57,19 +47,16 @@ const Admin = () => {
         setEditingPost(null);
     };
 
-    const handleDelete = (id: string) => {
+    const handleDelete = async (id: string) => {
         if (window.confirm("Are you sure you want to delete this post?")) {
-            const updated = posts.filter(p => p.id !== id);
-            setPosts(updated);
-
-            // Modify in-memory array globally so other pages see it dynamically
-            const index = initialArticles.findIndex(p => p.id === id);
-            if (index > -1) initialArticles.splice(index, 1);
+            await fetch(`http://localhost:3000/api/posts/${id}`, { method: 'DELETE' });
+            queryClient.invalidateQueries({ queryKey: ['articles'] });
         }
     };
 
-    const handleSave = (e: React.FormEvent) => {
+    const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
+        setIsLoading(true);
 
         let processedData = { ...formData } as Article;
         if (!processedData.slug && processedData.title) {
@@ -77,16 +64,21 @@ const Admin = () => {
         }
 
         if (editingPost) {
-            const updated = posts.map(p => p.id === editingPost.id ? processedData : p);
-            setPosts(updated);
-
-            const index = initialArticles.findIndex(p => p.id === editingPost.id);
-            if (index > -1) initialArticles[index] = processedData;
+            await fetch(`http://localhost:3000/api/posts/${editingPost.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(processedData)
+            });
         } else {
-            setPosts([processedData, ...posts]);
-            initialArticles.unshift(processedData);
+            await fetch(`http://localhost:3000/api/posts`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(processedData)
+            });
         }
 
+        queryClient.invalidateQueries({ queryKey: ['articles'] });
+        setIsLoading(false);
         closeModal();
     };
 
@@ -326,10 +318,11 @@ const Admin = () => {
                                 </button>
                                 <button
                                     onClick={handleSave}
-                                    className="flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground font-medium rounded-md hover:opacity-90 transition-opacity"
+                                    disabled={isLoading}
+                                    className="flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground font-medium rounded-md hover:opacity-90 transition-opacity disabled:opacity-50"
                                 >
                                     <Save className="w-4 h-4" />
-                                    <span>Save Post</span>
+                                    <span>{isLoading ? "Saving..." : "Save Post"}</span>
                                 </button>
                             </div>
                         </div>

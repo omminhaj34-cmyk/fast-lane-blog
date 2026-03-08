@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { getRecentArticles, categories } from "@/data/articles";
+import { useRecentArticles, categories } from "@/data/articles";
 
 const Sidebar = () => {
-  const recentPosts = getRecentArticles(4);
+  const { data: recentPosts = [] } = useRecentArticles(4);
 
   return (
     <aside className="space-y-8">

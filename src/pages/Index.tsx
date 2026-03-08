@@ -1,11 +1,11 @@
 import Layout from "@/components/Layout";
 import ArticleCard from "@/components/ArticleCard";
 import Sidebar from "@/components/Sidebar";
-import { getFeaturedArticles, getRecentArticles, articles } from "@/data/articles";
+import { useFeaturedArticles, useRecentArticles } from "@/data/articles";
 
 const Index = () => {
-  const featured = getFeaturedArticles();
-  const recent = getRecentArticles(6);
+  const { data: featured = [] } = useFeaturedArticles();
+  const { data: recent = [] } = useRecentArticles(6);
 
   return (
     <Layout>

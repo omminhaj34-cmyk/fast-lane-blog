@@ -2,11 +2,11 @@ import { useParams, Link } from "react-router-dom";
 import { Share2, Facebook, Twitter, Linkedin, Clock, User, Calendar } from "lucide-react";
 import Layout from "@/components/Layout";
 import Sidebar from "@/components/Sidebar";
-import { getArticleBySlug } from "@/data/articles";
+import { useArticleBySlug } from "@/data/articles";
 
 const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const article = getArticleBySlug(slug || "");
+  const { data: article } = useArticleBySlug(slug);
 
   if (!article) {
     return (
